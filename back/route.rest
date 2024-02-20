@@ -1,0 +1,33 @@
+GET http://localhost:3000/products
+###
+GET http://localhost:3000/products/65d49003fb44d05f2907c121
+###
+
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+			"id": 1000,
+			"code": "f230fh0g3",
+			"name": "Bamboo Watch",
+			"description": "Product Description",
+			"image": "bamboo-watch.jpg",
+			"price": 65,
+			"category": "Accessories",
+			"quantity": 24,
+			"inventoryStatus": "INSTOCK",
+			"rating": 5
+}
+
+###
+
+DELETE http://localhost:3000/products/65d49003fb44d05f2907c121
+
+###
+
+PATCH http://localhost:3000/products/65d3e9b01d840fe75afb6762
+Content-Type: application/json
+
+{
+			"quantity": 107
+}
