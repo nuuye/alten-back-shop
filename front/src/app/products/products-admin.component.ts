@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product, ProductPayload } from './product.class';
-import {PRODUCT_TABLE_CONF} from './products-admin-table.conf';
+import { PRODUCT_TABLE_CONF } from './products-admin-table.conf';
 import { ProductsService } from './products.service';
 
 import { BehaviorSubject } from 'rxjs';
@@ -16,7 +16,7 @@ import { CrudItemOptions } from 'app/shared/utils/crud-item-options/crud-item-op
 })
 export class ProductsAdminComponent extends BaseTableLoader implements OnInit {
 
-  public payload$: BehaviorSubject<ProductPayload> = new BehaviorSubject<ProductPayload>({products:[],total:0});
+  public payload$: BehaviorSubject<ProductPayload> = new BehaviorSubject<ProductPayload>({ products: [], total: 0 });
   public conf: CrudItemOptions[] = PRODUCT_TABLE_CONF;
   public entity = Product;
 
@@ -29,9 +29,8 @@ export class ProductsAdminComponent extends BaseTableLoader implements OnInit {
   ngOnInit(): void {
 
     // Display data table
-    this.productsService.getProducts().subscribe(products => 
-    {
-      this.payload$.next({products: products, total: products.length})
+    this.productsService.getProducts().subscribe(products => {
+      this.payload$.next({ products: products, total: products.length })
     });
 
   }

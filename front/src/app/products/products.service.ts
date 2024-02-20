@@ -4,26 +4,26 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Product } from './product.class';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class ProductsService {
 
     private static productslist: Product[] = null;
     private products$: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
 
+    public static getJsonValue: any;
+    public postJsonValue: any;
+
     constructor(private http: HttpClient) { }
 
     getProducts(): Observable<Product[]> {
-        if( ! ProductsService.productslist )
-        {
-            this.http.get<any>('assets/products.json').subscribe(data => {
-                ProductsService.productslist = data.data;
-                
+        if (!ProductsService.productslist) {
+            this.http.get<any>('http://localhost:3000/products').subscribe(data => {
+                ProductsService.productslist = data;
                 this.products$.next(ProductsService.productslist);
             });
         }
-        else
-        {
+        else {
             this.products$.next(ProductsService.productslist);
         }
 
@@ -31,17 +31,18 @@ export class ProductsService {
     }
 
     create(prod: Product): Observable<Product[]> {
+        console.log("create product")
+        this.http.post('http://localhost:3000/products', prod).subscribe(data => {
+            ProductsService.productslist.push(data);
+            this.products$.next(ProductsService.productslist);
+        });
 
-        ProductsService.productslist.push(prod);
-        this.products$.next(ProductsService.productslist);
-        
         return this.products$;
     }
 
-    update(prod: Product): Observable<Product[]>{
+    update(prod: Product): Observable<Product[]> {
         ProductsService.productslist.forEach(element => {
-            if(element.id == prod.id)
-            {
+            if (element.id == prod.id) {
                 element.name = prod.name;
                 element.category = prod.category;
                 element.code = prod.code;
@@ -59,8 +60,8 @@ export class ProductsService {
     }
 
 
-    delete(id: number): Observable<Product[]>{
-        ProductsService.productslist = ProductsService.productslist.filter(value => { return value.id !== id } );
+    delete(id: number): Observable<Product[]> {
+        ProductsService.productslist = ProductsService.productslist.filter(value => { return value.id !== id });
         this.products$.next(ProductsService.productslist);
         return this.products$;
     }

@@ -1,5 +1,5 @@
 <div class="app-frame" *ngIf="payload$ | async as pl">
-  <app-table 
+  <app-table
     class="table"
     [data]="pl.products"
     [totalRecords]="pl.total"
@@ -10,6 +10,7 @@
     (deleted)="onDeleteProduct($event)"
     [multiSelect]="false"
     [lazy]="false"
-    (lazyLoaded)="loadData($event)">
+    (lazyLoaded)="loadData($event)"
+  >
   </app-table>
 </div>

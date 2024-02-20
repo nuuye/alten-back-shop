@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Product = require('../models/products');
+const fs = require('fs');
 
 //Getting all the products
 router.get('/', async (req, res) => {
@@ -39,36 +40,52 @@ router.post('/', async (req, res) => {
     }
 });
 
+//Import products from a file
+router.post('/import', async (req, res) => {
+    try {
+        // Read the JSON file
+        const rawData = fs.readFileSync('products.json');
+        const productsData = JSON.parse(rawData).data;
+
+        // Map the products data to Product model and save them
+        const newProducts = await Product.insertMany(productsData);
+
+        res.status(201).json(newProducts);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});
+
 //Updating one product
 router.patch('/:id', getProduct, async (req, res) => {
-    if(req.body.name != null) {
+    if (req.body.name != null) {
         res.product.name = req.body.name;
     }
-    if(req.body.description != null) {
+    if (req.body.description != null) {
         res.product.description = req.body.description;
     }
-    if(req.body.price != null) {
+    if (req.body.price != null) {
         res.product.price = req.body.price;
     }
-    if(req.body.quantity != null) {
+    if (req.body.quantity != null) {
         res.product.quantity = req.body.quantity;
     }
-    if(req.body.inventoryStatus != null) {
+    if (req.body.inventoryStatus != null) {
         res.product.inventoryStatus = req.body.inventoryStatus;
     }
-    if(req.body.category != null) {
+    if (req.body.category != null) {
         res.product.category = req.body.category;
     }
-    if(req.body.image != null) {
+    if (req.body.image != null) {
         res.product.image = req.body.image;
     }
-    if(req.body.rating != null) {
+    if (req.body.rating != null) {
         res.product.rating = req.body.rating;
     }
-    if(req.body.code != null) {
+    if (req.body.code != null) {
         res.product.code = req.body.code;
     }
-    if(req.body.id != null) {
+    if (req.body.id != null) {
         res.product.id = req.body.id;
     }
     try {
