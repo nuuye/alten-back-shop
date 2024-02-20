@@ -40,6 +40,16 @@ router.post('/', async (req, res) => {
     }
 });
 
+//Creating multiple products
+router.post('/multiple', async (req, res) => {
+    try {
+        const newProducts = await Product.insertMany(req.body);
+        res.status(201).json(newProducts);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});
+
 //Import products from a file
 router.post('/import', async (req, res) => {
     try {

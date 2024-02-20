@@ -31,7 +31,6 @@ export class ProductsService {
     }
 
     create(prod: Product): Observable<Product[]> {
-        console.log("create product")
         this.http.post('http://localhost:3000/products', prod).subscribe(data => {
             ProductsService.productslist.push(data);
             this.products$.next(ProductsService.productslist);
@@ -41,28 +40,31 @@ export class ProductsService {
     }
 
     update(prod: Product): Observable<Product[]> {
-        ProductsService.productslist.forEach(element => {
-            if (element.id == prod.id) {
-                element.name = prod.name;
-                element.category = prod.category;
-                element.code = prod.code;
-                element.description = prod.description;
-                element.image = prod.image;
-                element.inventoryStatus = prod.inventoryStatus;
-                element.price = prod.price;
-                element.quantity = prod.quantity;
-                element.rating = prod.rating;
-            }
+        this.http.patch(`http://localhost:3000/products/${prod.id}`, prod).subscribe(data => {
+            ProductsService.productslist.forEach(element => {
+                if (element.id == prod.id) {
+                    element.name = prod.name;
+                    element.category = prod.category;
+                    element.code = prod.code;
+                    element.description = prod.description;
+                    element.image = prod.image;
+                    element.inventoryStatus = prod.inventoryStatus;
+                    element.price = prod.price;
+                    element.quantity = prod.quantity;
+                    element.rating = prod.rating;
+                }
+            });
+            this.products$.next(ProductsService.productslist);
         });
-        this.products$.next(ProductsService.productslist);
-
         return this.products$;
     }
 
 
     delete(id: number): Observable<Product[]> {
-        ProductsService.productslist = ProductsService.productslist.filter(value => { return value.id !== id });
-        this.products$.next(ProductsService.productslist);
+        this.http.delete(`http://localhost:3000/products/${id}`).subscribe(data => {
+            ProductsService.productslist = ProductsService.productslist.filter(element => element.id != id);
+            this.products$.next(ProductsService.productslist);
+        });
         return this.products$;
     }
 }

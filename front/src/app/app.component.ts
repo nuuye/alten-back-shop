@@ -3,7 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { SidenavService } from 'app/base/sidenav/sidenav.service';
 
-const TRANSPARENT_NAV_PAGES = [ 'login' ];
+const TRANSPARENT_NAV_PAGES = ['login'];
 
 @Component({
   selector: 'app-root',
@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
     private readonly router: Router,
     private readonly sidenavService: SidenavService
   ) {
-   
+
   }
 
   get getExpanded(): boolean {
@@ -29,6 +29,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+
   }
 }
