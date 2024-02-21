@@ -50,7 +50,6 @@ router.post('/multiple', async (req, res) => {
     }
 });
 
-//NOT WORKING
 //Updating one product
 router.patch('/:id', getProduct, async (req, res) => {
     if (req.body.name != null) {
@@ -80,9 +79,6 @@ router.patch('/:id', getProduct, async (req, res) => {
     if (req.body.code != null) {
         res.product.code = req.body.code;
     }
-    if (req.body.id != null) {
-        res.product.id = req.body.id;
-    }
     try {
         const updatedProduct = await res.product.save();
         res.json(updatedProduct);
@@ -102,16 +98,16 @@ router.delete('/:id', getProduct, async (req, res) => {
     }
 });
 
-//NOT WORKING
-//Deleting all products
-router.delete('/all', async (req, res) => {
+// Delete all products
+router.delete('/', async (req, res) => {
     try {
-        await Product.deleteMany();
+        await Product.deleteMany({});
         res.json({ message: 'All products deleted' });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
+
 
 //Middleware to get the product by ID
 async function getProduct(req, res, next) {
