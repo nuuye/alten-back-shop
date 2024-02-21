@@ -50,22 +50,6 @@ router.post('/multiple', async (req, res) => {
     }
 });
 
-//Import products from a file
-router.post('/import', async (req, res) => {
-    try {
-        // Read the JSON file
-        const rawData = fs.readFileSync('products.json');
-        const productsData = JSON.parse(rawData).data;
-
-        // Map the products data to Product model and save them
-        const newProducts = await Product.insertMany(productsData);
-
-        res.status(201).json(newProducts);
-    } catch (err) {
-        res.status(400).json({ message: err.message });
-    }
-});
-
 //Updating one product
 router.patch('/:id', getProduct, async (req, res) => {
     if (req.body.name != null) {
@@ -117,6 +101,17 @@ router.delete('/:id', getProduct, async (req, res) => {
     }
 });
 
+//Deleting all products
+router.delete('/all', async (req, res) => {
+    try {
+        await Product.deleteMany();
+        res.json({ message: 'All products deleted' });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+//Middleware to get the product by ID
 async function getProduct(req, res, next) {
     let product;
     try {

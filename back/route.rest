@@ -50,7 +50,10 @@ Content-Type: application/json
 ]
 ###
 
-DELETE http://localhost:3000/products/65d4be49514150488b4b4e3d
+DELETE http://localhost:3000/products/65d4bd16514150488b4b4e34
+
+###
+DELETE http://localhost:3000/products/all
 
 ###
 
