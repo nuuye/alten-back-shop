@@ -36,7 +36,6 @@ Content-Type: application/json
 			"rating": 5
 	},
 	{
-			"id":11,
 			"code": "454",
 			"name": "Banana multiple 2",
 			"description": "Product Description",
@@ -50,7 +49,7 @@ Content-Type: application/json
 ]
 ###
 
-DELETE http://localhost:3000/products/65d4bd16514150488b4b4e34
+DELETE http://localhost:3000/products/65d64bdf0aee9d6ad79578b8
 
 ###
 DELETE http://localhost:3000/products/all

@@ -15,7 +15,7 @@ const initializeProducts = async () => {
             const rawData = fs.readFileSync('./front/src/assets/products.json');
             const productsData = JSON.parse(rawData).data;
             const newProducts = await Product.insertMany(productsData);
-            console.log(newProducts, '\n' + newProducts.length + ' Products loaded successfully.');
+            console.log(newProducts, '\n' + newProducts.length + ' Products have been loaded successfully.');
             exit(0);
         } else {
             console.log('Products already loaded');

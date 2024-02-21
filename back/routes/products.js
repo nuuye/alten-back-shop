@@ -50,6 +50,7 @@ router.post('/multiple', async (req, res) => {
     }
 });
 
+//NOT WORKING
 //Updating one product
 router.patch('/:id', getProduct, async (req, res) => {
     if (req.body.name != null) {
@@ -101,6 +102,7 @@ router.delete('/:id', getProduct, async (req, res) => {
     }
 });
 
+//NOT WORKING
 //Deleting all products
 router.delete('/all', async (req, res) => {
     try {
