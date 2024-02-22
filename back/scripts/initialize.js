@@ -7,10 +7,12 @@ mongoose.connect('mongodb://localhost/products');
 
 console.log('Initializing products...');
 
-// Define the async function
+// Function to initialize products
 const initializeProducts = async () => {
     try {
+        // Retrieve all products from the database
         const products = await Product.find();
+        // If no products are found, load the products from the json file
         if (products.length === 0) {
             const rawData = fs.readFileSync('./front/src/assets/products.json');
             const productsData = JSON.parse(rawData).data;

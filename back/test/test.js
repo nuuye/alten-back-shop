@@ -33,7 +33,6 @@ describe('Product Routes', () => {
         expect(res.body).toHaveProperty('id', newProduct.id);
     });
 
-
     it('should fetch a single product', async () => {
         const res = await request(app)
             .get(`/products/${productID}`)

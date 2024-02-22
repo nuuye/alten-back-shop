@@ -52,40 +52,22 @@ router.post('/multiple', async (req, res) => {
 
 //Updating one product
 router.patch('/:id', getProduct, async (req, res) => {
-    if (req.body.name != null) {
-        res.product.name = req.body.name;
-    }
-    if (req.body.description != null) {
-        res.product.description = req.body.description;
-    }
-    if (req.body.price != null) {
-        res.product.price = req.body.price;
-    }
-    if (req.body.quantity != null) {
-        res.product.quantity = req.body.quantity;
-    }
-    if (req.body.inventoryStatus != null) {
-        res.product.inventoryStatus = req.body.inventoryStatus;
-    }
-    if (req.body.category != null) {
-        res.product.category = req.body.category;
-    }
-    if (req.body.image != null) {
-        res.product.image = req.body.image;
-    }
-    if (req.body.rating != null) {
-        res.product.rating = req.body.rating;
-    }
-    if (req.body.code != null) {
-        res.product.code = req.body.code;
-    }
+    // Update only the fields that are present in the request
+    if (req.body.name != null) res.product.name = req.body.name;
+    if (req.body.description != null) res.product.description = req.body.description;
+    if (req.body.price != null) res.product.price = req.body.price;
+    if (req.body.quantity != null) res.product.quantity = req.body.quantity;
+    if (req.body.inventoryStatus != null) res.product.inventoryStatus = req.body.inventoryStatus;
+    if (req.body.category != null) res.product.category = req.body.category;
+    if (req.body.image != null) res.product.image = req.body.image;
+    if (req.body.rating != null) res.product.rating = req.body.rating;
+    if (req.body.code != null) res.product.code = req.body.code;
     try {
         const updatedProduct = await res.product.save();
         res.json(updatedProduct);
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
-
 });
 
 //Deleting one product
@@ -113,6 +95,7 @@ router.delete('/', async (req, res) => {
 async function getProduct(req, res, next) {
     let product;
     try {
+        // Find the product by ID
         product = await Product.findById(req.params.id);
         if (product == null) {
             return res.status(404).json({ message: 'Cannot find product' });
@@ -125,4 +108,5 @@ async function getProduct(req, res, next) {
     next();
 }
 
+// Export the router
 module.exports = router;
