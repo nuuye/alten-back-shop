@@ -37,6 +37,7 @@ Avant de commencer, assurez-vous d'avoir installé les outils suivants :
 2. Initialisez la base de données avec les 30 produits en exécutant le script `initialization.js` :
 
     ```bash
+    cd scripts
     node initialization.js
     ```
 
@@ -50,9 +51,9 @@ Le backend sera alors accessible à l'adresse `http://localhost:3000`.
 
 ## Tests
 
-1. Les requêtes sont présentes et testable dans le fichier route.rest (extension REST Client sur vscode), un fichier postman à importer est également présent.
+1. Les requêtes sont présentes et testable dans le fichier route.rest (extension REST Client sur VScode), un fichier postman à importer est également présent.
 
-2. Des tests fait avec jest sont executable en lançant la commande suivante:
+2. Des tests fait avec jest sont exécutable en lançant la commande suivante:
 
     ```bash
     npm test
