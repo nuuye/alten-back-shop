@@ -38,7 +38,7 @@ Avant de commencer, assurez-vous d'avoir installé les outils suivants :
 
     ```bash
     cd scripts
-    node initialization.js
+    node initialize.js
     ```
 
 3. Lancez le serveur backend en mode développement avec la commande suivante :
