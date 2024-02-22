@@ -1,4 +1,4 @@
-# README
+# Instructions
 
 Ce projet utilise Node.js et Express pour le backend, ainsi que MongoDB comme base de données.
 
@@ -53,7 +53,7 @@ Le backend sera alors accessible à l'adresse `http://localhost:3000`.
 
 1. Les requêtes sont présentes et testable dans le fichier route.rest (extension REST Client sur VScode), un fichier postman à importer est également présent.
 
-2. Des tests fait avec jest sont exécutable en lançant la commande suivante:
+2. Des tests fait avec Jest sont exécutable en lançant la commande suivante:
 
     ```bash
     npm test
@@ -61,7 +61,7 @@ Le backend sera alors accessible à l'adresse `http://localhost:3000`.
 
 Assurez vous que le port 3000 soit libre.
 
-# Instructions: Back-end
+# Consignes: Back-end
 
 Développer un back-end permettant la gestion de produits définis plus bas. Vous pouvez utiliser la technologie de votre choix parmis la list suivante :
 
