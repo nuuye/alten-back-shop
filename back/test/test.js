@@ -1,4 +1,5 @@
 const request = require('supertest');
+const mongoose = require('mongoose');
 const app = require('../server');
 
 describe('Product Routes', () => {
@@ -15,6 +16,7 @@ describe('Product Routes', () => {
         inventoryStatus: "INSTOCK",
         rating: 5
     };
+
     it('should fetch all products', async () => {
         const res = await request(app)
             .get('/products')
@@ -52,4 +54,11 @@ describe('Product Routes', () => {
             .delete(`/products/${productID}`)
         expect(res.statusCode).toEqual(200);
     });
+
+    afterAll(done => {
+        // Closing the DB connection
+        mongoose.connection.close();
+        done();
+    })
+
 });
